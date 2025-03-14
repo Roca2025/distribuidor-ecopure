@@ -1,4 +1,7 @@
-// Array de productos (usa los nombres de archivo tal cual están en tu carpeta img)
+// SDK de Mercado Pago
+const mp = new MercadoPago("TU_PUBLIC_KEY", { locale: "es-AR" });
+
+// Array de productos
 const products = [
   {
     id: 1,
@@ -119,27 +122,42 @@ window.onclick = function(event) {
   }
 };
 
-// Inicializar la página
-document.addEventListener("DOMContentLoaded", function() {
-  renderProducts();
-  renderCart();
-});document.getElementById("checkout").addEventListener("click", function() {
+// Integración con Mercado Pago
+document.getElementById("checkout").addEventListener("click", async function() {
   if (cart.length === 0) {
     alert("El carrito está vacío. Agrega productos antes de comprar.");
     return;
   }
 
-  let total = 0;
-  let message = "Detalle de la compra:\n";
-  cart.forEach(item => {
-    message += `- ${item.name}: $${item.price.toLocaleString()}\n`;
-    total += item.price;
-  });
-  message += `\nTotal a pagar: $${total.toLocaleString()}\n\n¡Gracias por tu compra (simulada)!`;
+  // Crear la preferencia de pago
+  const preference = {
+    items: cart.map(item => ({
+      title: item.name,
+      unit_price: item.price,
+      quantity: 1
+    }))
+  };
 
-  alert(message);
+  try {
+    const response = await fetch("https://tu-backend.com/crear-preferencia", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(preference)
+    });
 
-  // Opcional: vaciar el carrito después de la 'compra'
-  cart = [];
-  renderCart(); // Asegúrate de tener esta función para actualizar la vista
+    const data = await response.json();
+    mp.checkout({
+      preference: { id: data.preferenceId },
+      autoOpen: true
+    });
+  } catch (error) {
+    console.error("Error al crear la preferencia:", error);
+    alert("Hubo un problema con el pago. Inténtalo de nuevo.");
+  }
+});
+
+// Inicializar la página
+document.addEventListener("DOMContentLoaded", function() {
+  renderProducts();
+  renderCart();
 });
