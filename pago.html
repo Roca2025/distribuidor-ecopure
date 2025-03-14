@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Pagar con Mercado Pago</title>
+  <!-- Este script es opcional si usas el SDK de Mercado Pago para obtener el token de tarjeta -->
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+</head>
+<body>
+  <h1>Pagar tu purificador</h1>
+  <form id="paymentForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" required /><br><br>
+    
+    <label for="amount">Monto:</label>
+    <input type="number" id="amount" required /><br><br>
+    
+    <!-- Aquí normalmente iría la integración para obtener de forma segura el token de la tarjeta,
+         por simplicidad usaremos un token de prueba -->
+    <p>Se usará un token de prueba (simulación)</p>
+    
+    <button type="submit">Pagar</button>
+  </form>
+
+  <script>
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const amount = Number(document.getElementById('amount').value);
+
+      // En una integración real, aquí se debe obtener el token de tarjeta de forma segura.
+      // Para este ejemplo, usaremos un token ficticio.
+      const token = 'test_token';
+
+      const paymentData = {
+        transactionAmount: amount,
+        token: token,
+        description: 'Compra de purificador',
+        installments: 1,
+        paymentMethodId: 'visa',  // O el método de pago que corresponda
+        email: email
+      };
+
+      try {
+        const response = await fetch('https://WebServerNode.rodrigobiana44.repl.co/process_payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(paymentData)
+        });
+        const data = await response.json();
+        alert('Pago realizado: ' + JSON.stringify(data));
+      } catch (error) {
+        console.error('Error al procesar el pago', error);
+        alert('Ocurrió un error al procesar el pago.');
+      }
+    });
+  </script>
+</body>
+</html>
