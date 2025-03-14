@@ -123,4 +123,23 @@ window.onclick = function(event) {
 document.addEventListener("DOMContentLoaded", function() {
   renderProducts();
   renderCart();
+});document.getElementById("checkout").addEventListener("click", function() {
+  if (cart.length === 0) {
+    alert("El carrito está vacío. Agrega productos antes de comprar.");
+    return;
+  }
+
+  let total = 0;
+  let message = "Detalle de la compra:\n";
+  cart.forEach(item => {
+    message += `- ${item.name}: $${item.price.toLocaleString()}\n`;
+    total += item.price;
+  });
+  message += `\nTotal a pagar: $${total.toLocaleString()}\n\n¡Gracias por tu compra (simulada)!`;
+
+  alert(message);
+
+  // Opcional: vaciar el carrito después de la 'compra'
+  cart = [];
+  renderCart(); // Asegúrate de tener esta función para actualizar la vista
 });
