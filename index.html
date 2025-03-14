@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>EcoPure Distribuidor - MVP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Header: Navegación fija -->
+    <header class="sticky-header">
+      <div class="container header-container">
+        <h1 class="logo">EcoPure Distribuidor</h1>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#carrito">Carrito</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Sección de Productos -->
+    <section id="productos" class="section">
+      <div class="container">
+        <h2>Productos</h2>
+        <div id="product-list" class="product-list"></div>
+      </div>
+    </section>
+
+    <!-- Sección de Carrito -->
+    <section id="carrito" class="section">
+      <div class="container">
+        <h2>Carrito de Compras</h2>
+        <div id="cart-items" class="cart-items"></div>
+        <button id="checkout" class="btn">Proceder a Comprar</button>
+      </div>
+    </section>
+
+    <!-- Modal para ver detalles del producto -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <div id="modal-details"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
