@@ -1,8 +1,17 @@
-tu-proyecto/
+mi-proyecto/
 ├── index.html
 ├── styles.css
 ├── script.js
 └── img/
     ├── IMG-20250113-WA0030.jpg
     ├── IMG-20250204-WA0022.jpg
-    └── ... (las demás imágenes)
+    ├── IMG-20250312-WA0003.jpg
+    ├── IMG-20250312-WA0004.jpg
+    ├── IMG-20250313-WA0010.jpg
+    ├── IMG-20250314-WA0005.jpg
+    ├── IMG-20250314-WA0009.jpg
+    ├── IMG-20250314-WA0010.jpg
+    ├── IMG-20250314-WA0011.jpg
+    ├── IMG-20250314-WA0012.jpg
+    ├── IMG-20250314-WA0013.jpg
+    └── IMG-20250314-WA0014.jpg
