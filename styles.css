@@ -79,7 +79,7 @@ body {
 
 .product-card img {
   width: 100%;
-  height: 200px;
+  height: 200px; /* Tamaño fijo para homogeneidad */
   object-fit: cover;
   margin-bottom: 0.5rem;
 }
