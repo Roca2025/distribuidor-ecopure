@@ -140,7 +140,8 @@ document.getElementById("checkout").addEventListener("click", async function() {
   };
 
   try {
-    const response = await fetch("https://tu-servidor.repl.co/crear-preferencia", {
+    // Llamada al endpoint de tu servidor en Replit
+    const response = await fetch("https://workspace-effe3ad5-4518-49b3-a07a-c534936f783c.rodrigobiana44.repl.dev/crear-preferencia", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(preference)
@@ -149,7 +150,8 @@ document.getElementById("checkout").addEventListener("click", async function() {
     const data = await response.json();
 
     if (data.init_point) {
-      window.location.href = data.init_point; // Redirige a Mercado Pago
+      // Redirige al usuario a la URL de Mercado Pago
+      window.location.href = data.init_point;
     } else {
       alert("Error al generar la preferencia de pago.");
     }
