@@ -134,22 +134,25 @@ document.getElementById("checkout").addEventListener("click", async function() {
     items: cart.map(item => ({
       title: item.name,
       unit_price: item.price,
-      quantity: 1
+      quantity: 1,
+      currency_id: "ARS"
     }))
   };
 
   try {
-    const response = await fetch("https://tu-backend.com/crear-preferencia", {
+    const response = await fetch("https://tu-servidor.repl.co/crear-preferencia", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(preference)
     });
 
     const data = await response.json();
-    mp.checkout({
-      preference: { id: data.preferenceId },
-      autoOpen: true
-    });
+
+    if (data.init_point) {
+      window.location.href = data.init_point; // Redirige a Mercado Pago
+    } else {
+      alert("Error al generar la preferencia de pago.");
+    }
   } catch (error) {
     console.error("Error al crear la preferencia:", error);
     alert("Hubo un problema con el pago. Inténtalo de nuevo.");
